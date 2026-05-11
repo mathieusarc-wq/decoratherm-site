@@ -16,24 +16,18 @@ export default function ContactForm() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (status === "loading") return;
-    setStatus("loading");
-    setErrorMsg(null);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, project }),
-      });
-      if (!res.ok) {
-        const j = await res.json().catch(() => ({}));
-        throw new Error(j?.error ?? "Erreur");
-      }
-      setStatus("sent");
-    } catch (err) {
-      setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Erreur inconnue");
-    }
+    if (!name.trim() || !phone.trim() || !project.trim()) return;
+
+    const subject = encodeURIComponent(`Demande de contact — ${name.trim()}`);
+    const body = encodeURIComponent(
+      `Nouvelle demande de contact DECORATHERM\n\n` +
+      `Nom : ${name.trim()}\n` +
+      `Téléphone : ${phone.trim()}\n\n` +
+      `Projet :\n${project.trim()}`
+    );
+
+    window.open(`mailto:exploitation@decoratherm.com?subject=${subject}&body=${body}`);
+    setStatus("sent");
   };
 
   if (status === "sent") {
