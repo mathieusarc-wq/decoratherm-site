@@ -489,7 +489,7 @@ export default function DevisSimulator() {
           </p>
           <p className="mt-6 text-xs text-[var(--color-muted)]">
             En attendant, vous pouvez nous joindre directement au{" "}
-            <a href="tel:+33621913001" className="font-extrabold text-[var(--color-navy)] hover:text-[var(--color-red)]">
+            <a href="tel:+33628913001" className="font-extrabold text-[var(--color-navy)] hover:text-[var(--color-red)]">
               06 28 91 30 01
             </a>
             .
