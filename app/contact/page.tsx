@@ -7,7 +7,7 @@ import { SITE } from "@/lib/config";
 export const metadata: Metadata = {
   title: "Contact — devis et prise de rendez-vous",
   description:
-    "Contactez DECORATHERM pour un devis ITE ou ravalement de façade. Réponse sous 24h ouvrées. Téléphone : 06 21 91 30 01 — France entière.",
+    "Contactez DECORATHERM pour un devis ITE ou ravalement de façade. Réponse sous 24h ouvrées. Téléphone : 06 28 91 30 01 — France entière.",
 };
 
 export default function ContactPage() {

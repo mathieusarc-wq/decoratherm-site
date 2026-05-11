@@ -123,7 +123,7 @@ export default function DevisSimulator() {
       setLeadPhase("sent");
     } catch {
       setLeadPhase("error");
-      setLeadError("Envoi impossible. Réessayez ou appelez-nous au 06 21 91 30 01.");
+      setLeadError("Envoi impossible. Réessayez ou appelez-nous au 06 28 91 30 01.");
     }
   };
 
@@ -490,7 +490,7 @@ export default function DevisSimulator() {
           <p className="mt-6 text-xs text-[var(--color-muted)]">
             En attendant, vous pouvez nous joindre directement au{" "}
             <a href="tel:+33621913001" className="font-extrabold text-[var(--color-navy)] hover:text-[var(--color-red)]">
-              06 21 91 30 01
+              06 28 91 30 01
             </a>
             .
           </p>
