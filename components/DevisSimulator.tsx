@@ -81,50 +81,34 @@ export default function DevisSimulator() {
 
   const submitLead = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!result || !type || !storey || leadPhase === "sending") return;
+    if (!result || !type || !storey) return;
     if (!leadName.trim() || !leadPhoneVal.trim() || !leadEmail.trim() || !leadCity.trim()) {
       setLeadError("Merci de remplir tous les champs.");
       return;
     }
-    setLeadPhase("sending");
-    setLeadError(null);
 
     const storeyLabel = STOREY_OPTIONS.find((s) => s.value === storey)?.label ?? "";
     const typeLabel = PRICING[type].label;
-    const priceRange = `${fmt(result.low)} € — ${fmt(result.high)} €`;
-    const netRange = result.cee > 0 ? `${fmt(result.netLow)} € — ${fmt(result.netHigh)} €` : "";
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: leadName.trim(),
-          phone: leadPhoneVal.trim(),
-          email: leadEmail.trim(),
-          city: leadCity.trim(),
-          project: `Demande de devis suite à simulation en ligne. Voir contexte ci-dessous.`,
-          simulation: {
-            typeLabel,
-            type,
-            surface: surfaceNum,
-            storeyLabel,
-            storey,
-            priceRange,
-            cee: result.cee,
-            netRange,
-          },
-        }),
-      });
-      if (!res.ok) {
-        const j = await res.json().catch(() => ({}));
-        throw new Error(j?.error ?? "send_failed");
-      }
-      setLeadPhase("sent");
-    } catch {
-      setLeadPhase("error");
-      setLeadError("Envoi impossible. Réessayez ou appelez-nous au 06 28 91 30 01.");
-    }
+    const subject = encodeURIComponent(`Demande de devis ${typeLabel} - ${leadName.trim()}`);
+    const body = encodeURIComponent(
+      `Nouvelle demande de devis DECORATHERM\n\n` +
+      `--- Coordonnées ---\n` +
+      `Nom : ${leadName.trim()}\n` +
+      `Téléphone : ${leadPhoneVal.trim()}\n` +
+      `Email : ${leadEmail.trim()}\n` +
+      `Ville : ${leadCity.trim()}\n\n` +
+      `--- Simulation ---\n` +
+      `Type : ${typeLabel}\n` +
+      `Surface : ${surfaceNum} m²\n` +
+      `Étages : ${storeyLabel}\n` +
+      `Estimation : ${fmt(result.low)} € — ${fmt(result.high)} € HT\n` +
+      (result.cee > 0 ? `Aide CEE : − ${fmt(result.cee)} €\n` : ``) +
+      (result.cee > 0 ? `Reste à charge : ${fmt(result.netLow)} € — ${fmt(result.netHigh)} € HT\n` : ``)
+    );
+
+    window.open(`mailto:exploitation@decoratherm.com?subject=${subject}&body=${body}`);
+    setLeadPhase("sent");
   };
 
   return (
