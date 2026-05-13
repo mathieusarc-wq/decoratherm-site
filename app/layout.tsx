@@ -56,7 +56,7 @@ export default function RootLayout({
               legalName: "DECORATHERM SAS",
               description:
                 "Installateur spécialiste de l'isolation thermique extérieure (ITE), de l'isolation intérieure et du ravalement de façade. Certifié Qualibat RGE.",
-              telephone: "+33621913001",
+              telephone: "+33628913001",
               email: "exploitation@decoratherm.com",
               areaServed: "FR",
               url: "https://decoratherm.com",

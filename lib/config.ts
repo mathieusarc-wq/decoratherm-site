@@ -4,7 +4,7 @@ export const SITE = {
   name: "DECORATHERM",
   tagline: "Isolation & ravalement de façade.",
   phone: "06 28 91 30 01",
-  phoneTel: "+33621913001",
+  phoneTel: "+33628913001",
   email: "exploitation@decoratherm.com",
   zone: "France entière",
   certifications: ["Qualibat RGE", "Décennale", "RC Pro"],
